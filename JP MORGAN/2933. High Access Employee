@@ -1,0 +1,43 @@
+//In this queastion we have to find the name of those people whose access is more than or equal to three times within one hour period 
+//My first approach sort according to the name and  and their access time using sperator custom sort operator and then make a window of each   name and find whether  somewhere there is condition becoming true and then move to another name  or we can say another window
+
+//Second approach
+ // to implement above approach in a very readable manner use map of string and vector<string> which store the access time of each people and then directly try to find  out whether this student is making condition true or not.
+
+
+class Solution {
+public:
+    vector<string> findHighAccessEmployees(vector<vector<string>>& arr) {
+        unordered_map<string,vector<string>>mp;
+        sort(arr.begin(),arr.end());
+        vector<string>ans;
+        
+        for(int i=0;i<arr.size();i++)
+        {
+            mp[arr[i][0]].push_back(arr[i][1]);
+        }
+        
+        for(auto it:mp)
+        {
+            bool flag =false;
+            vector<string>temp = it.second;
+            for(int i=0;i+2<temp.size();i++)
+            {
+                int val1 = stoi(temp[i]);
+                int val2 = stoi(temp[i+2]);
+                if(val2-val1<100)
+                {
+                    flag =true;
+                }
+            }
+            
+            
+            if(flag==true)
+            {
+                ans.push_back(it.first);
+            }
+        }
+        return ans;
+        
+    }
+};
