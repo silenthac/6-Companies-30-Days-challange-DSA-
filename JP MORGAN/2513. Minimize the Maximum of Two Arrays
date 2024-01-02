@@ -1,0 +1,44 @@
+//first of all tried one approach in which i take all divisor and keep my loop itrating until the count value of both is greater than 0 i check each number from 1 wheter it is divible by divisor1 or not same for divisor 2 and if i put it in the divisor1 i dont allow to put in the divisor2
+//BUT THIS APPROACH FAILED i got the solution but we have to find the minimum possible maximum
+
+// then i got the intiution of using BINARY SEARCH
+//and i will check from 1 to INT_MAX wheterh mid is our minimum possible maximum integer or not 
+//  HOW?
+     // We will find the number which are divisible by divisor1 in that range same for another divisor and if we subtract both from mid we will get element which are not divisible by divisor1 and as we will get some numbers which are divisble by both we have to put all those element in either of the array.
+
+
+
+
+
+
+class Solution {
+public:
+    int minimizeSet(int d1, int d2, int Cnt1, int Cnt2) {
+        long long low =1;
+        long long  high =  INT_MAX;
+        long long ans=INT_MAX;
+        while(low<=high)
+        {
+            long long mid  = low+(high-low)/2;
+            long long count1 = mid-mid/d1;//element which are not  divisible by d1
+            long long count2 =mid-mid/d2; //element which are not divisble by d2
+            
+             long long temp=mid-mid/(((long long)d1*d2)/__gcd(d1,d2));
+            if(count1>=Cnt1&&count2>=Cnt2&&Cnt1+Cnt2<=temp)
+            {
+                ans =min(ans,mid);
+                high =mid-1;
+            }
+            else
+            {
+                low =mid+1;
+            }
+            
+            
+            
+        }
+        return ans;
+        
+        
+    }
+};
