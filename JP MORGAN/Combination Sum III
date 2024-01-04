@@ -1,0 +1,45 @@
+//Basically in this question we have to find all the combination  whose sum is equal to n and one more condition number of element in one combination cant be more than k 
+// so we will try with every number and backtrack when we go to in the wrong direction thats how we will be able to solve this question
+
+
+
+
+class Solution {
+public:
+    
+    
+    void solve(int ele,int k,int n,vector<int>&temp,vector<vector<int>>&ans,int tempsum)
+    {
+        if(temp.size()>k||tempsum>n)
+        {
+            return;
+        }
+        
+        
+        if(tempsum==n&&temp.size()==k)
+        {
+            ans.push_back(temp);
+            return;   
+        }
+        
+       for(int i=ele;i<=9;i++)
+       {
+           temp.push_back(i);
+           solve(i+1,k,n,temp,ans,tempsum+i);
+           temp.pop_back();
+       }
+        
+            
+        
+
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+    
+        vector<vector<int>>ans;
+        vector<int>temp;
+        solve(1,k,n,temp,ans,0);
+        return ans;
+        
+        
+    }
+};
