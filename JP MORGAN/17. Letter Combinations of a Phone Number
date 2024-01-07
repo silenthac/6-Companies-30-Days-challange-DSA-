@@ -1,0 +1,48 @@
+/*
+
+
+*/
+
+
+class Solution {
+public:
+    
+    void solve(int index,string digits,unordered_map<char,string>&mp,string temp,vector<string>&ans)
+    {
+        if(index>=digits.size())
+        {
+            ans.push_back(temp);
+            return;
+        }
+        
+        string s = mp[digits[index]];
+        for(int i=0;i<s.size();i++)
+        {
+            solve(index+1,digits,mp,temp+s[i],ans);
+        }
+        
+    }
+    
+    
+    
+    
+    vector<string> letterCombinations(string digits) {
+                //first of all we have to map digit value with its correponding string of alphabets as in mobile phone
+        if(digits.size()==0) return {};
+        unordered_map<char,string>mp;
+        mp['2'] = "abc";
+        mp['3'] = "def";
+        mp['4'] ="ghi";
+        mp['5'] = "jkl";
+        mp['6'] = "mno";
+        mp['7'] = "pqrs";
+        mp['8'] = "tuv";
+        mp['9'] = "wxyz";
+        
+        vector<string>ans;
+        string temp ="";
+        solve(0,digits,mp,temp,ans);
+        return ans;
+        
+    }
+};
