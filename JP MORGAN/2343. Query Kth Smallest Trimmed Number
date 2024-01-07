@@ -1,0 +1,54 @@
+class Solution {
+public:
+    vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& queries) {
+        //make a vector to store the answer
+        vector<int>ans;
+        
+        //iterate each and every query
+        for(auto q:queries)
+        {
+            //take min pq of pair of string and int 
+            priority_queue<pair<string,int>>pq;
+            
+            //for each query we have to iterate complete nums
+            for(int i=0;i<nums.size();i++)
+            {
+                //we have to trim each num from nums array
+                // we will trim nums[j].size()-second value of query[i] of length q[1])
+                int start = nums[i].size()-q[1];
+                string sub = nums[i].substr(start,q[1]);
+                
+                 ////we will check if the number of element in pq is les than 1st value of query
+                if(pq.size()<q[0])
+                {
+                     // if yes push it
+                    pq.push({sub,i});
+                    
+                }
+       
+        //else we will check if top value is greater than trimmed value pop that and insert trimmed value
+                else
+                {
+                    if(pq.top().first>sub)
+                    {
+                        pq.pop();
+                        pq.push({sub,i});
+                    }
+                }
+        
+       
+                
+            }
+             //afer inside loop
+        //put the index of top element from pq in ans;
+        ans.push_back(pq.top().second);
+                 
+                
+            
+        }
+        return ans;
+            
+        
+        
+    }
+};
