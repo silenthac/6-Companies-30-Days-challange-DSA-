@@ -1,0 +1,37 @@
+//this question is little tricky basically what we have to do we have to take each and every cell equally so think this binary matrix as array of row*col size we have to take each and every index once  we will take that and find the row and col of that index in the matrix by divisor and modulor and  move in a circular manner; 
+
+//int this question i basically learn how  to convert index in one d array to row and col in 2d array
+
+
+class Solution {
+public:
+    int rows;
+    int col;
+    int upperbound;
+    int random;
+    
+    Solution(int m, int n) {
+        rows=m;
+        col=n;
+        upperbound =rows*col;
+        random =-1;
+        
+    }
+    
+    vector<int> flip() {
+        random = (random+1)%upperbound;
+        return {random/col,random%col};
+        
+    }
+    
+    void reset() {
+        
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(m, n);
+ * vector<int> param_1 = obj->flip();
+ * obj->reset();
+ */
