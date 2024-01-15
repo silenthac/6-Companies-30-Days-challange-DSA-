@@ -1,0 +1,66 @@
+class Solution {
+public:
+    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+        vector<pair<int,int>>dir = {{0,1},{1,0},{0,-1},{-1,0}};
+        int nrows = isWater.size();
+        int mcols = isWater[0].size();
+        queue<pair<int,int>>pq;
+        //Take visited matrix whether we visited that cell or not
+        vector<vector<bool>>visited(nrows,vector<bool>(mcols,false));
+        //if the cell is water mark its height to zero and add it into our queue and also mark visited array true
+        for(int i=0;i<nrows;i++)
+        {
+            for(int j=0;j<mcols;j++)
+            {
+                //if the cell is water
+                if(isWater[i][j]==1)
+                {
+                    isWater[i][j] = 0;
+                    pq.push({i,j});
+                    visited[i][j] =true;
+                   
+                   
+                }
+            }
+        }
+              //start iteratig until our queue has element      
+         while(!pq.empty())
+            {
+                auto top = pq.front();
+                int row =top.first;
+                int col = top.second;
+              //pop first element
+                pq.pop();
+                
+               //iterate on its neighbour
+                for(int i=0;i<dir.size();i++)
+                {
+                    int chrow = row+dir[i].first;
+                    int chcol = col+dir[i].second;
+                      //if already visited leave or out of bound
+                    if(chrow<0||chrow>=nrows||chcol<0||chcol>=mcols||visited[chrow][chcol]==true)
+                    {
+                        continue;
+                    }
+                    
+        //else mark it true and store answer as prev+1
+        //push it into queue
+                    isWater[chrow][chcol] = 1+isWater[row][col];
+                    pq.push({chrow,chcol});
+                    visited[chrow][chcol] =true;
+                }
+                
+                       
+            }
+                   return isWater;
+        
+       
+       
+        
+        
+      
+      
+        
+        
+    }
+};
