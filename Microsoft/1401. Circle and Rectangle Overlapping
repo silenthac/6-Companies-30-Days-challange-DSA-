@@ -1,0 +1,20 @@
+class Solution {
+public:
+    
+    //Shortest distance from the centre to the rectangle and compare it with radius;
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+        
+        int xpoint  = max(x1,min(x2,xCenter));
+        int ypoint = max(y1,min(y2,yCenter));
+        
+        int  distanceX = (xpoint-xCenter);
+        int distanceY =  (ypoint-yCenter);
+       int res = ((distanceX*distanceX)+(distanceY*distanceY));
+      if(res<=(radius*radius))
+      {
+          return true;
+      }
+        return false;
+        
+    }
+};
