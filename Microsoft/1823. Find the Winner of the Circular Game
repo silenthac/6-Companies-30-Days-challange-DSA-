@@ -1,0 +1,60 @@
+//This problem is little tricky (JOSEPHUS) we have to remove kth element from the set of 1 to n in circular order also 
+// what i did i put all the element in the vector remove kth elemet and start indexing from the next of that element basically same index as we deleted the previous one and when only one element is remaining i just return 
+
+// second way to solve this question is using queue put all the element in the queue and then remove kth elemt by reversing that much we need also
+
+
+class Solution {
+public:
+    
+    int findTheWinner(int n, int k) {
+//         k--;
+//         vector<int>vec(n);
+//         for(int i=1;i<=n;i++)
+//         {
+//             vec[i-1] = i;
+            
+//         }
+//         solve(n,k,vec,0);
+        // return vec[0];
+        
+        queue<int>pq;
+        for(int i=1;i<=n;i++)
+        {
+            pq.push(i);
+            
+        }
+        
+        while(pq.size()>1)
+        {
+            int s = k-1;
+            while(s--)
+            {
+                auto top =  pq.front();
+                pq.pop();
+                pq.push(top);
+            }
+            pq.pop();
+        }
+        
+        return pq.front();
+        
+    }
+    
+    // void solve(int n,int k,vector<int>&vec,int i)
+    // {
+//         if(vec.size()==1)
+//         {
+//             return;
+//         }
+        
+//        int start = (i+k)%vec.size();
+//         vec.erase(vec.begin()+start);
+//         solve(n,k,vec,start);
+        
+        
+    // }
+    
+    
+    
+};
